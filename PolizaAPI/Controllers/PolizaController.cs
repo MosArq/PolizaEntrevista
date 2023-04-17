@@ -1,4 +1,5 @@
-﻿using CAPoliza.Aplicacion;
+﻿using CAPoliza.Aplicacion.SQLsAplicacion;
+using CAPoliza.Aplicacion.MDbAplicacion;
 using CAPoliza.Dominios;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,9 +13,13 @@ namespace PolizaAPI.Controllers
     {
         private readonly IServicioPoliza _servicio;
 
-        public PolizaController(IServicioPoliza servicio)
+        private readonly IMDBServicioPoliza _MDBservicio;
+
+        public PolizaController(IServicioPoliza servicio, IMDBServicioPoliza mDBServicioPoliza)
         {
             _servicio = servicio;
+
+            _MDBservicio = mDBServicioPoliza;
         }
 
 
@@ -48,5 +53,16 @@ namespace PolizaAPI.Controllers
             var polizasServicio = await _servicio.PolizaPorPlacaOnumero(IdPoliza, PlacaAuto);
             return Ok(polizasServicio);
         }
+
+
+
+        [HttpGet("MGDBAllPolizas")]
+        public ActionResult<List<MDBPoliza>> MGDGet()
+        {
+            var PolizaServicio = _MDBservicio.GetAllPolizas();
+            return Ok(PolizaServicio);
+
+        }
+
     }
 }

@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAPoliza.Infraestructura
+namespace CAPoliza.Infraestructura.SQLsInfraestructura
 {
     public class PolizaDBcontext : DbContext
     {
-        public PolizaDBcontext(DbContextOptions<PolizaDBcontext> options) : base(options) 
+        public PolizaDBcontext(DbContextOptions<PolizaDBcontext> options) : base(options)
         {
 
 

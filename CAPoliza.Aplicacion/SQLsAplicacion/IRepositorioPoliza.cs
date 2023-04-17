@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAPoliza.Aplicacion
+namespace CAPoliza.Aplicacion.SQLsAplicacion
 {
-    public interface IServicioPoliza
+    public interface IRepositorioPoliza
     {
         List<Poliza> GetAllPolizas();
 
         Poliza CreatePoliza(Poliza poliza);
 
         Task<List<Poliza>> PolizaPorPlacaOnumero(int? IdPoliza = null, string? PlacaAuto = null);
+
+
     }
 }

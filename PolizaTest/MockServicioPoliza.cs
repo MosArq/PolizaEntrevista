@@ -1,4 +1,4 @@
-﻿using CAPoliza.Aplicacion;
+﻿using CAPoliza.Aplicacion.SQLsAplicacion;
 using CAPoliza.Dominios;
 using System;
 using System.Collections.Generic;

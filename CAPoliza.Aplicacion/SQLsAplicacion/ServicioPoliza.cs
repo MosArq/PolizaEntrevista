@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAPoliza.Aplicacion
+namespace CAPoliza.Aplicacion.SQLsAplicacion
 {
     public class ServicioPoliza : IServicioPoliza
     {
@@ -38,7 +38,7 @@ namespace CAPoliza.Aplicacion
         {
             DateTime Hoy = DateTime.Today;
 
-            return (poliza.FechaInicialPoliza < Hoy || poliza.FechaFinalPoliza < Hoy);
+            return poliza.FechaInicialPoliza < Hoy || poliza.FechaFinalPoliza < Hoy;
         }
 
         public async Task<List<Poliza>> PolizaPorPlacaOnumero(int? IdPoliza = null, string? PlacaAuto = null)

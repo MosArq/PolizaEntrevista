@@ -1,4 +1,4 @@
-﻿using CAPoliza.Aplicacion;
+﻿using CAPoliza.Aplicacion.SQLsAplicacion;
 using CAPoliza.Dominios;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAPoliza.Infraestructura
+namespace CAPoliza.Infraestructura.SQLsInfraestructura
 {
     public class RepositorioPoliza : IRepositorioPoliza
     {
