@@ -57,11 +57,34 @@ namespace PolizaAPI.Controllers
 
 
         [HttpGet("MGDBAllPolizas")]
-        public ActionResult<List<MDBPoliza>> MGDGet()
+        public ActionResult<List<MDBPoliza>> MDBGet()
         {
             var PolizaServicio = _MDBservicio.GetAllPolizas();
             return Ok(PolizaServicio);
 
+        }
+
+
+        [HttpPost("MGDBCreatePolizas")]
+        public ActionResult<MDBPoliza> MDBPostPoliza(MDBPoliza poliza)
+        {
+            try
+            {
+                var PolizaCreacion = _MDBservicio.CreatePoliza(poliza);
+                return Ok(poliza);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet("MDBPolizaPorPlacaOnumero")]
+        public async Task<ActionResult<List<MDBPoliza>>> MDBPolizaPorPlacaOnumero(int? IdPoliza = null, string? PlacaAuto = null)
+        {
+            var polizasServicio = await _MDBservicio.PolizaPorPlacaOnumero(IdPoliza, PlacaAuto);
+            return Ok(polizasServicio);
         }
 
     }

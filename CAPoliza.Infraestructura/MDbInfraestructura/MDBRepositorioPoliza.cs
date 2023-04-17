@@ -1,6 +1,7 @@
 ﻿using CAPoliza.Aplicacion.MDbAplicacion;
 using CAPoliza.Dominios;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +28,30 @@ namespace CAPoliza.Infraestructura.MDbModel
 
         public MDBPoliza CreatePoliza(MDBPoliza poliza)
         {
-            throw new NotImplementedException();
+            _poliza.InsertOne(poliza);
+            return poliza;
         }
 
-        public Task<List<MDBPoliza>> PolizaPorPlacaOnumero(int? IdPoliza = null, string? PlacaAuto = null)
+        public async Task<List<MDBPoliza>> PolizaPorPlacaOnumero(int? IdPoliza = null, string? PlacaAuto = null)
         {
-            throw new NotImplementedException();
+            var builder = Builders<MDBPoliza>.Filter;
+            var filter = builder.Empty;
+
+            if (IdPoliza != null)
+            {
+                filter = filter & builder.Eq(p => p.id, IdPoliza);
+            }
+
+            if (!string.IsNullOrEmpty(PlacaAuto))
+            {
+                filter = filter & builder.Eq(p => p.PlacaAuto, PlacaAuto);
+            }
+
+            var result = await _poliza.Find(filter).ToListAsync();
+            return result;
         }
+
+
+
     }
 }

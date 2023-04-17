@@ -34,6 +34,12 @@ namespace CAPoliza.Aplicacion.SQLsAplicacion
             return poliza;
         }
 
+        public async Task<List<Poliza>> PolizaPorPlacaOnumero(int? IdPoliza = null, string? PlacaAuto = null)
+        {
+            return await _repositorioPoliza.PolizaPorPlacaOnumero(IdPoliza, PlacaAuto);
+        }
+
+        #region Regla de negocio
         public bool Vigencia(Poliza poliza)
         {
             DateTime Hoy = DateTime.Today;
@@ -41,11 +47,7 @@ namespace CAPoliza.Aplicacion.SQLsAplicacion
             return poliza.FechaInicialPoliza < Hoy || poliza.FechaFinalPoliza < Hoy;
         }
 
-        public async Task<List<Poliza>> PolizaPorPlacaOnumero(int? IdPoliza = null, string? PlacaAuto = null)
-        {
-            return await _repositorioPoliza.PolizaPorPlacaOnumero(IdPoliza, PlacaAuto);
-        }
-
+        #endregion
 
 
     }

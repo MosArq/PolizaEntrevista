@@ -1,23 +1,18 @@
-﻿using CAPoliza.Aplicacion.SQLsAplicacion;
+﻿using CAPoliza.Aplicacion.MDbAplicacion;
 using CAPoliza.Dominios;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PolizaTest
+namespace PolizaTest.MDBTest
 {
-    public class MockServicioPoliza : IServicioPoliza
+    public class MockMDBServicioPoliza: IMDBServicioPoliza
     {
-        private readonly List<Poliza> _polizas = new List<Poliza>();
+        private readonly List<MDBPoliza> _polizas = new List<MDBPoliza>();
 
-        public List<Poliza> GetAllPolizas()
+        public List<MDBPoliza> GetAllPolizas()
         {
             return _polizas;
         }
 
-        public Task<List<Poliza>> PolizaPorPlacaOnumero(int? IdPoliza = null, string? PlacaAuto = null)
+        public Task<List<MDBPoliza>> PolizaPorPlacaOnumero(int? IdPoliza = null, string? PlacaAuto = null)
         {
             var query = _polizas.AsQueryable();
 
@@ -34,11 +29,10 @@ namespace PolizaTest
             return Task.FromResult(query.ToList());
         }
 
-        public Poliza CreatePoliza(Poliza poliza)
+        public MDBPoliza CreatePoliza(MDBPoliza poliza)
         {
             _polizas.Add(poliza);
             return poliza;
         }
-
     }
 }

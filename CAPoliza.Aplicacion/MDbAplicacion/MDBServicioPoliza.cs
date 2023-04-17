@@ -24,12 +24,28 @@ namespace CAPoliza.Aplicacion.MDbAplicacion
 
         public MDBPoliza CreatePoliza(MDBPoliza poliza)
         {
-            throw new NotImplementedException();
+            if (Vigencia(poliza))
+            {
+                throw new Exception("La poliza que se desea crear no es vigente");
+            }
+
+            _mdbrepositorioPoliza.CreatePoliza(poliza);
+            return poliza;
         }
 
-        public Task<List<MDBPoliza>> PolizaPorPlacaOnumero(int? IdPoliza = null, string? PlacaAuto = null)
+        public async Task<List<MDBPoliza>> PolizaPorPlacaOnumero(int? IdPoliza = null, string? PlacaAuto = null)
         {
-            throw new NotImplementedException();
+            return await _mdbrepositorioPoliza.PolizaPorPlacaOnumero(IdPoliza, PlacaAuto);
         }
+
+
+        #region Regla de negocio
+        public bool Vigencia(MDBPoliza poliza)
+        {
+            DateTime Hoy = DateTime.Today;
+
+            return poliza.FechaInicialPoliza < Hoy || poliza.FechaFinalPoliza < Hoy;
+        }
+        #endregion
     }
 }
